@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parkinson's Disease Prediction</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Predict Parkinson's Disease</h2>
+        <form id="prediction-form">
+            <div class="form-group">
+                <label for="mdvp_fo_hz">MDVP:Fo(Hz):</label>
+                <input type="text" id="mdvp_fo_hz" name="mdvp_fo_hz">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_fhi_hz">MDVP:Fhi(Hz):</label>
+                <input type="text" id="mdvp_fhi_hz" name="mdvp_fhi_hz">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_flo_hz">MDVP:Flo(Hz):</label>
+                <input type="text" id="mdvp_flo_hz" name="mdvp_flo_hz">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_jitter_perc">MDVP:Jitter(%):</label>
+                <input type="text" id="mdvp_jitter_perc" name="mdvp_jitter_perc">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_jitter_abs">MDVP:Jitter(Abs):</label>
+                <input type="text" id="mdvp_jitter_abs" name="mdvp_jitter_abs">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_rap">MDVP:RAP:</label>
+                <input type="text" id="mdvp_rap" name="mdvp_rap">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_ppq">MDVP:PPQ:</label>
+                <input type="text" id="mdvp_ppq" name="mdvp_ppq">
+            </div>
+            <div class="form-group">
+                <label for="jitter_ddp">Jitter:DDP:</label>
+                <input type="text" id="jitter_ddp" name="jitter_ddp">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_shimmer">MDVP:Shimmer:</label>
+                <input type="text" id="mdvp_shimmer" name="mdvp_shimmer">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_shimmer_db">MDVP:Shimmer(dB):</label>
+                <input type="text" id="mdvp_shimmer_db" name="mdvp_shimmer_db">
+            </div>
+            <div class="form-group">
+                <label for="shimmer_apq3">Shimmer:APQ3:</label>
+                <input type="text" id="shimmer_apq3" name="shimmer_apq3">
+            </div>
+            <div class="form-group">
+                <label for="shimmer_apq5">Shimmer:APQ5:</label>
+                <input type="text" id="shimmer_apq5" name="shimmer_apq5">
+            </div>
+            <div class="form-group">
+                <label for="mdvp_apq">MDVP:APQ:</label>
+                <input type="text" id="mdvp_apq" name="mdvp_apq">
+            </div>
+            <div class="form-group">
+                <label for="shimmer_dda">Shimmer:DDA:</label>
+                <input type="text" id="shimmer_dda" name="shimmer_dda">
+            </div>
+            <div class="form-group">
+                <label for="nhr">NHR:</label>
+                <input type="text" id="nhr" name="nhr">
+            </div>
+            <div class="form-group">
+                <label for="hnr">HNR:</label>
+                <input type="text" id="hnr" name="hnr">
+            </div>
+            <div class="form-group">
+                <label for="rpde">RPDE:</label>
+                <input type="text" id="rpde" name="rpde">
+            </div>
+            <div class="form-group">
+                <label for="dfa">DFA:</label>
+                <input type="text" id="dfa" name="dfa">
+            </div>
+            <div class="form-group">
+                <label for="spread1">Spread1:</label>
+                <input type="text" id="spread1" name="spread1">
+            </div>
+            <div class="form-group">
+                <label for="spread2">Spread2:</label>
+                <input type="text" id="spread2" name="spread2">
+            </div>
+            <div class="form-group">
+                <label for="d2">D2:</label>
+                <input type="text" id="d2" name="d2">
+            </div>
+            <div class="form-group">
+                <label for="ppe">PPE:</label>
+                <input type="text" id="ppe" name="ppe">
+            </div>
+            <button type="submit">Predict</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#prediction-form').submit(function(event) {
+                event.preventDefault();
+                var form_data = $(this).serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/predict',
+                    data: form_data,
+                    success: function(response) {
+                        // Print the prediction result on the terminal
+                        console.log(response.prediction_text);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
